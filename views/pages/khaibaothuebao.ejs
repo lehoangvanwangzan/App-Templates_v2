@@ -84,6 +84,13 @@
     </div>
 
   </div>
+
+  <div class="form-group row">
+    <div class="col-lg-4">
+      <span for="inputUser" class="col-lg-1 col-form-label  " style="min-width: 100px">User</span>
+      <input type="text" class="form-control" id="inputUser" placeholder="User">
+    </div>
+  </div>
   <div class="row p-2">
     <div class="col-lg-2 p-2">
       <button id="btn-createAll" type="button" class="btn btn-outline-primary button btn-lg">
@@ -131,6 +138,21 @@
         <span class="bi bi-person-plus green-color"></span> Show đồng bộ
       </button>
     </div>
+    <div class="col-lg-2 p-2">
+      <button id="btn-kiemtraXt" type="button" class="btn btn-outline-primary button btn-lg" onclick="kiemtraXT()">
+        <span class="bi bi-person-plus green-color"></span>Kiểm tra xác thực
+      </button>
+    </div>
+    <div class="col-lg-2 p-2">
+      <button id="btn-clearXt type="button" class="btn btn-outline-primary button btn-lg" onclick="getDataShowInfoOnu()">
+        <span class="bi bi-person-plus green-color"></span>CLear xác thực
+      </button>
+    </div>
+    <div class="col-lg-2 p-2">
+      <button id="btn-clearMac" type="button" class="btn btn-outline-primary button btn-lg" onclick="getDataShowInfoOnu()">
+        <span class="bi bi-person-plus green-color"></span>CLear mac
+      </button>
+    </div>
   </div>
 
   <div class="form-group p-2">
@@ -167,6 +189,42 @@
         clearInterval(timeoutID);
         clearInterval(timeoutID2);
       }
+
+function kiemtraXT() {
+
+var user = document.getElementById('inputUser').value;
+
+if (user!= '') {
+   
+  
+  $.ajax({
+    url: '/kiemtraXT/' + user,
+    type: 'GET',
+    beforeSend: function(){
+      delayedAlert();
+      delayedAlert2();
+    },
+    complete: function() {
+      clearAlert();
+    },
+    success: function (res) {
+    
+      $("#outputCLI").html(res);
+     
+    },
+    
+    error: function (err) {
+       alert("Lỗi lấy dữ liệu")
+    }
+  });
+}
+else {
+  alert('Nhập User cần kiểm tra')
+}
+
+}
+
+  
   function getDataShowMac() {
 
     var ip = document.getElementById('idIPOLT').value;
