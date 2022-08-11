@@ -1,6 +1,7 @@
 
 const model = require('../modules/Sidemodel');
 const xuly =require('../modules/xuly');
+const { use } = require('../routes/side');
 class SileController {
   //Get/
   index(req, res) {
@@ -116,6 +117,45 @@ class SileController {
 
   }
 
+  kiemtraXT (req, res) {
+
+    var user = req.params.user;
+    
+    var data_mac_olt ='';
+    let { PythonShell } = require('python-shell');
+       let option = {
+         mode: "text",
+         pythonOptions: ['-u'],
+         args: ['show subscribers user-name '+user+'\n']
+        };
+
+    //chay ham Python lay du lieu  
+    PythonShell.run('./controllers/SSH.py', option,    function(err, results) {
+      if (err) throw err;
+      //console.log(results);
+      //res.send(results);
+      results.forEach( function(data2) {
+        if (data2 == 'r/'){
+            res.write('\n')
+        }else{
+           
+         //   console.log('in lan 1'+data2);
+             data_mac_olt = data_mac_olt+ data2 +'\n';
+       
+        }
+    });
+    console.log(data_mac_olt );
+    res.send(data_mac_olt)
+     res.end();
+      console.log('da hoan thanh')
+
+      
+     
+    });
+
+    console.log("Đang lấy thông tin user"+user)
+
+  }
   getVlanNet(req, res) {
     var slid_ip = req.params.slid_ip;
     
