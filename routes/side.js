@@ -8,6 +8,8 @@ const  sideController = require('../controllers/SideController');
 router.get("/getInfoOLT/:ip", sideController.getInfoOLT);
 router.get("/getmacOLT/:slid_ip", sideController.getmacOLT);
 router.get("/kiemtraXT/:user", sideController.kiemtraXT);
+router.get("/clearXT/:user", sideController.clearXT);
+router.get("/clearMacONU/:mac", sideController.clearMacONU);
 router.get("/getInfoOnuOLT/:slid_ip", sideController.getInfoOnuOLT);
 router.get("/getVlanNet/:slid_ip", sideController.getVlanNet);
 router.get("/getmacOLT/:ip", sideController.getInfoOLT);
