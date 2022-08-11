@@ -90,6 +90,10 @@
       <span for="inputUser" class="col-lg-1 col-form-label  " style="min-width: 100px">User</span>
       <input type="text" class="form-control" id="inputUser" placeholder="User">
     </div>
+    <div class="col-lg-4">
+      <span for="inputMac" class="col-lg-1 col-form-label  " style="min-width: 100px">Mac Onu</span>
+      <input type="text" class="form-control" id="inputMac" placeholder="Địa chỉ mac vlan 11">
+    </div>
   </div>
   <div class="row p-2">
     <div class="col-lg-2 p-2">
@@ -144,12 +148,12 @@
       </button>
     </div>
     <div class="col-lg-2 p-2">
-      <button id="btn-clearXt type="button" class="btn btn-outline-primary button btn-lg" onclick="getDataShowInfoOnu()">
+      <button id="btn-clearXt" type="button" class="btn btn-outline-primary button btn-lg" onclick="clearXT()">
         <span class="bi bi-person-plus green-color"></span>CLear xác thực
       </button>
     </div>
     <div class="col-lg-2 p-2">
-      <button id="btn-clearMac" type="button" class="btn btn-outline-primary button btn-lg" onclick="getDataShowInfoOnu()">
+      <button id="btn-clearMac" type="button" class="btn btn-outline-primary button btn-lg" onclick="clearMacONU()">
         <span class="bi bi-person-plus green-color"></span>CLear mac
       </button>
     </div>
@@ -224,7 +228,74 @@ else {
 
 }
 
+function clearMacONU() {
+
+var mac = document.getElementById('inputMac').value;
+
+if (mac!= '') {
+   
   
+  $.ajax({
+    url: '/clearMacONU/' + mac,
+    type: 'GET',
+    beforeSend: function(){
+      delayedAlert();
+      delayedAlert2();
+    },
+    complete: function() {
+      clearAlert();
+    },
+    success: function (res) {
+    
+      $("#outputCLI").html(res);
+     
+    },
+    
+    error: function (err) {
+       alert("Lỗi lấy dữ liệu")
+    }
+  });
+}
+else {
+  alert('Nhập địa mac ONU cần clear')
+}
+
+}
+ 
+
+function clearXT() {
+
+var user = document.getElementById('inputUser').value;
+
+if (user!= '') {
+   
+  $.ajax({
+    url: '/clearXT/' + user,
+    type: 'GET',
+    beforeSend: function(){
+      delayedAlert();
+      delayedAlert2();
+    },
+    complete: function() {
+      clearAlert();
+    },
+    success: function (res) {
+    
+      $("#outputCLI").html(res);
+     
+    },
+    
+    error: function (err) {
+       alert("Lỗi lấy dữ liệu")
+    }
+  });
+}
+else {
+  alert('Nhập địa mac User cần clear xác thực')
+}
+
+}
+
   function getDataShowMac() {
 
     var ip = document.getElementById('idIPOLT').value;

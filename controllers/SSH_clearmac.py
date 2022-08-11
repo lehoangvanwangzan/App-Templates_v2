@@ -9,13 +9,6 @@ import shutil, glob, datetime
 
 from datetime import datetime
 
-## get ngay gio
-now = datetime.now() 
-# dd/mm/YY H:M:S
-new_date_time = now.strftime("%d/%m/%Y %H:%M:%S")
-
-
-#ham telet OLT 
 
 def check_sshBNG (ip, user_ssh, password_ssh,tenbng):
    ssh = paramiko.SSHClient()

@@ -117,11 +117,48 @@ class SileController {
 
   }
 
+  clearMacONU (req,res) {
+    var mac = req.params.mac;
+    var ouput_ssh ='';
+    let { PythonShell } = require('python-shell');
+       let option = {
+         mode: "text",
+         pythonOptions: ['-u'],
+         args: ['clear pppoe lockout mac-address  '+mac+'\n']
+        };
+
+    //chay ham Python lay du lieu  
+    PythonShell.run('./controllers/SSH.py', option,    function(err, results) {
+      if (err) throw err;
+      //console.log(results);
+      //res.send(results);
+      results.forEach( function(data2) {
+        if (data2 == 'r/'){
+            res.write('\n')
+        }else{
+           
+         //   console.log('in lan 1'+data2);
+             ouput_ssh = ouput_ssh+ data2 +'\n';
+       
+        }
+    });
+    console.log(ouput_ssh );
+    
+    res.send(ouput_ssh)
+    res.end();
+    console.log('da hoan thanh')
+
+      
+     
+    });
+
+    console.log("Đang clear mac:"+mac)
+  }
   kiemtraXT (req, res) {
 
     var user = req.params.user;
     
-    var data_mac_olt ='';
+    var ouput_ssh ='';
     let { PythonShell } = require('python-shell');
        let option = {
          mode: "text",
@@ -140,12 +177,13 @@ class SileController {
         }else{
            
          //   console.log('in lan 1'+data2);
-             data_mac_olt = data_mac_olt+ data2 +'\n';
+             ouput_ssh = ouput_ssh+ data2 +'\n';
        
         }
     });
-    console.log(data_mac_olt );
-    res.send(data_mac_olt)
+    console.log(ouput_ssh );
+    
+    res.send(ouput_ssh)
      res.end();
       console.log('da hoan thanh')
 
@@ -156,6 +194,49 @@ class SileController {
     console.log("Đang lấy thông tin user"+user)
 
   }
+
+
+  clearXT (req, res) {
+
+    var user = req.params.user;
+    
+    var ouput_ssh ='';
+    let { PythonShell } = require('python-shell');
+       let option = {
+         mode: "text",
+         pythonOptions: ['-u'],
+         args: ['clear network-access aaa subscriber username '+user+'\n']
+        };
+
+    //chay ham Python lay du lieu  
+    PythonShell.run('./controllers/SSH.py', option,    function(err, results) {
+      if (err) throw err;
+      //console.log(results);
+      //res.send(results);
+      results.forEach( function(data2) {
+        if (data2 == 'r/'){
+            res.write('\n')
+        }else{
+           
+         //   console.log('in lan 1'+data2);
+             ouput_ssh = ouput_ssh+ data2 +'\n';
+       
+        }
+    });
+    console.log(ouput_ssh );
+    
+    res.send(ouput_ssh)
+     res.end();
+      console.log('da hoan thanh')
+
+      
+     
+    });
+
+    console.log("Đang clear xt user"+user)
+
+  }
+
   getVlanNet(req, res) {
     var slid_ip = req.params.slid_ip;
     
