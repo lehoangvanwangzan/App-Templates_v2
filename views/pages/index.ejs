@@ -1,0 +1,32 @@
+<!-- views/pages/index.ejs -->
+
+<!DOCTYPE html>
+<html>
+<head >
+    <%- include( '../partials/head.ejs') -%>
+</head>
+
+<body>
+	<!-- Top container -->
+	<%- include('../partials/top-container.ejs') -%>
+	<!-- End Top container -->
+
+	<!-- Sidebar/Menu -->
+	<%- include('../partials/sidebar.ejs') -%>
+	<!-- End Sidebar/Menu -->
+
+	<!-- Overlay effect when opening sidebar on small screens -->
+
+	<!-- End Overlay -->
+
+	<!-- Main Page -->
+	<div class="p-2">
+		<!-- Overview -->
+	<%- include('../pages/khaibaothuebao.ejs') -%>
+		<!-- End Overview -->
+
+	</div>
+	<!-- End Main Page -->
+
+</body>
+</html>

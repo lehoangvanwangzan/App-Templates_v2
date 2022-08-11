@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="text-center">Thêm Trung Tâm</h3>
+                <!-- Inserts a new record in the StudentInfo table -->
+                <form action="addStudent" method="post">
+    
+                <div class="form-group">
+                        <label for="txtAge">Tên Trung Tâm:</label>
+                        <input type="number"   class="form-control" placeholder="Nhập tên Trung Tâm" id="txtTenTT" name="txtTenTT">
+                    </div>
+
+                   
+
+                    <button type="submit" class="btn btn-primary">Lưu</button>
+                </form>
+                <div class="form-group">
+                    <label for="txtAge">IP OLT:</label>
+                    <input type="text"  class="form-control" placeholder="Nhập IP" id="txtIP" name="txtIP" oninput="getCardPon(this.value)">
+                </div>
+                <div class="form-group">
+                    <label for="txtAge">IP OLT:</label>
+                    <input type="text"  class="form-control" placeholder="txtvlan" id="txtvlan" name="txtvlan" >
+                </div>
+
+
+            </div>
+
+
+
+            <div class="col-md-6">
+                <h3 class="text-center">Danh Sách Trung Tâm</h3>
+                <table class="table table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                          
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Display list of records from the StudentInfo table -->
+                        <% for (const i in result) { %>
+                        <tr>
+                            <td><%= result[i].ID_TT %></td>
+                            <td><%= result[i].Ten_TT %></td>
+                           
+                            <td width="200px">
+                              <!-- <a href="" class="btn btn-link" data-toggle="modal" data-id=<%= result[i].ID_TT %> data-target="#delete-trungtam-modal"">Xóa</a>--->
+                                  <!--  <a href="/trungtam/<%=result[i].ID_TT%>">Delete</a> -->
+                                  <a href="" class="btn btn-link" data-toggle="modal" data-id=<%= result[i].ID_TT %> data-target="#delete-trungtam-modal"">Xóa</a>
+                             &emsp; | &emsp;
+                                <a onclick="editStudent(<%= result[i].ID_TT %>)" href="javascript:void(0)" data-toggle="modal" data-target="#editModal">Edit</a>
+                            </td>
+                        </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+                <!-- Edit Student Modal -->
+                <div class="modal fade" id="editModal">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Cập nhập trung tâm</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <form action="updateStudent" method="post">
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <input type="hidden" id="txtID" name="txtID">
+                                    <div class="form-group">
+                                        <label for="txtEName">Name:</label>
+                                        <input class="form-control" placeholder="Enter name" id="txtETenTT" name="txtETenTT">
+                                    </div>
+                                   
+                                </div>
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                  <!-- delete Modal -->
+
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="delete-trungtam-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Xóa Trung tâm ?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        Bạn có chắn xóa Trung tâm này ?
+        </div>
+        <div class="modal-footer">
+            <button id="btn-delete-trungtam" type="button" class="btn btn-danger">Xóa bỏ</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+        
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+   <form name="delete-trungtam-form" method="GET"></form>
+    <script>
+        function editStudent(id) {
+            // AJAX call to select a record in the editable modal popup
+            $.ajax({
+                url: '/trungtam/edit/' + id,
+                type: 'GET',
+                success: function (res) {
+                   $("#txtID").val(res.ID_TT);
+                   $("#txtETenTT").val(res.Ten_TT);
+                   
+                  // alert(res.ID_TT+ res.Ten_TT);
+                   
+                },
+                error: function (err) {
+                    alert(err);
+                }
+            });
+        }
+
+        function getCardPon(ip) {
+           // document.getElementById('txtvlan').value = ip;
+            alert(ip.length);
+        if(ip.length ==1) {
+         $.ajax({
+                url: '/trungtam/edit/' + ip,
+                type: 'GET',
+                success: function (res) {
+                   $("#txtvlan").val(res.Ten_TT);
+                  
+                   
+                  // alert(res.ID_TT+ res.Ten_TT);
+                   
+                },
+                error: function (err) {
+                    $("#txtvlan").val("");
+                }
+            });
+        }
+        }
+
+        //ham xoa 
+        var trungtamid;
+        var deleteForm = document.forms['delete-trungtam-form'];
+        $('#delete-trungtam-modal').on('show.bs.modal', function(event){
+            var button = $(event.relatedTarget);
+            trungtamid = button.data('id');
+          
+        })
+
+        var btndeltetrungtam = document.getElementById('btn-delete-trungtam');
+        btndeltetrungtam.onclick = function() {
+            //alert(trungtamid);
+           // deleteForm.action = '/trungtam/'+trungtamid+'?method=DELETE';
+           deleteForm.action = '/trungtam/'+trungtamid;
+            deleteForm.submit();
+
+          /*  $.ajax({
+                url: '/trungtam/'+trungtamid,
+                type: 'GET',
+                success: function (res) {
+                   res.alert("xoa thanh cong");
+                   
+                },
+                error: function (err) {
+                    alert(err);
+                }
+            });*/
+
+        }
+    </script>
+</body>
+</html>
