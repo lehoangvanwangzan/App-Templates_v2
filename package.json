@@ -12,10 +12,12 @@
   "dependencies": {
     "bootstrap-icons": "^1.8.3",
     "ejs": "^3.1.8",
+    "express-async-errors": "^3.1.1",
     "jquery": "^3.6.0",
     "json-server": "^0.17.0",
     "msnodesqlv8": "^2.4.8",
     "mssql": "^8.1.2",
+    "print-js": "^1.6.0",
     "python-shell": "^3.0.1"
   },
   "devDependencies": {

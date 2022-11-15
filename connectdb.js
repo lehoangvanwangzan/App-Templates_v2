@@ -7,14 +7,12 @@ var config ={
         database: 'KhaiBaoThueBao',
         synchronize: true,
         trustServerCertificate: true
-    
-
 };
 
-const conn = new sql.ConnectionPool(config).connect().then(pool => {
-    return pool;
-});
-
+    const conn = new sql.ConnectionPool(config).connect().then(pool => {
+        return pool;   
+    }
+   );
 module.exports = {
     conn: conn,
     sql : sql

@@ -6,7 +6,7 @@ class SileController {
   //Get/
   index(req, res) {
 
-    res.render('pages/index');
+    res.render('pages/index_khaibaothuebao');
   }
 
   search(req, res) {
@@ -62,15 +62,14 @@ class SileController {
              }
          });
 
-          res.send(data_mac_olt)
+          res.send(data_mac_olt);
           console.log("da hoan thanh lay mac olt IP: "+ ip);
          res.end();
         
        });
 
        console.log('Dang lay mac olt')
-       
-
+  
   }
 
   //lay info OLT ALU 
