@@ -4,9 +4,10 @@ const xuly =require('../modules/xuly');
 const { use } = require('../routes/side');
 class SileController {
   //Get/
-  index(req, res) {
+  index(req, res, next) {
 
     res.render('pages/index_khaibaothuebao');
+    next();
   }
 
   search(req, res) {
@@ -254,4 +255,4 @@ class SileController {
   }
 }
 
-module.exports = new SileController;
+module.exports = new SileController();

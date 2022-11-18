@@ -6,7 +6,7 @@
     <div class="col-lg-4">
       <span for="" class="col-lg-1 col-form-label  " style="min-width: 100px">Loại OLT</span>
       <span class="">
-        <select class="form-control" id="typeOLT">
+        <select class="fstdropdown-select" id="typeOLT">
           <option class="">Alcatel</option>
           <option>ZTE</option>
           <option>ZTE-Mini</option>
@@ -18,7 +18,7 @@
     <div class="col-lg-4">
       <span for="" class="col-lg-1 col-form-label">Loại ONT</span>
       <span class="">
-        <select class="form-control" id="typeModem">
+        <select class="fstdropdown-select" id="typeModem">
           <option>Igate-020</option>
           <option>Igate-040</option>
           <option>Igate-240</option>
@@ -100,7 +100,7 @@
     </div>
     <div class="col-lg-2 p-2">
       <button id="btn-del" type="button" class="btn btn-outline-primary button btn-lg">
-        <span class="bi bi-trash"></span> Remove
+        <span class="bi bi-trash" style="color:red"></span> Remove
       </button>
     </div>
     <div class="col-lg-2 p-2">
@@ -136,22 +136,22 @@
     </div>
     <div class="col-lg-2 p-2">
       <button id="btn-showinfoOnu" type="button" class="btn btn-outline-primary button btn-lg" onclick="getDataShowInfoOnu()">
-        <span class="bi bi-person-plus green-color"></span> Show đồng bộ
+        <span class="fas fa-sync-alt" style="color:green"></span> Show đồng bộ
       </button>
     </div>
     <div class="col-lg-2 p-2">
       <button id="btn-kiemtraXt" type="button" class="btn btn-outline-primary button btn-lg" onclick="kiemtraXT()">
-        <span class="bi bi-person-plus green-color"></span>Kiểm tra xác thực
+        <span class="far fa-id-card green-color"></span> Kiểm tra xác thực
       </button>
     </div>
     <div class="col-lg-2 p-2">
       <button id="btn-clearXt" type="button" class="btn btn-outline-primary button btn-lg" onclick="clearXT()">
-        <span class="bi bi-person-plus green-color"></span>CLear xác thực
+        <span class="bi-arrow-repeat" style="color:red"></span> CLear xác thực
       </button>
     </div>
     <div class="col-lg-2 p-2">
       <button id="btn-clearMac" type="button" class="btn btn-outline-primary button btn-lg" onclick="clearMacONU()">
-        <span class="bi bi-person-plus green-color"></span>CLear mac
+        <span class="bi bi-person-plus" style="color:red"></span> CLear mac
       </button>
     </div>
   </div>
